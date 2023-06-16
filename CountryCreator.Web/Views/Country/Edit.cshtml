@@ -1,0 +1,19 @@
+﻿@model CountryCreator.Web.ViewModels.CountryViewModel
+
+@{
+    ViewData["Title"] = "Edit Country";
+}
+
+<div class="container col-lg-12">
+    <div class="row col-sm-6 center">
+        <h3 class="mb-3 mt-3">Edit Country</h3>
+        <form asp-controller="Country" asp-action="Edit" autocomplete="off" method="post" enctype="multipart/form-data">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingCountryNameInput" placeholder="countryName" name="CountryName" value="@Model.CountryName">
+                <label for="floatingCountryNameInput">Country Name</label>
+            </div>
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+    </div>
+</div>

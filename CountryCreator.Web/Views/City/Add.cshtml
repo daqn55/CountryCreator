@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Add City";
+}
+
+<div class="container col-lg-12">
+    <div class="row col-sm-6 center">
+        <h3 class="mb-3 mt-3">Add new City</h3>
+        <form asp-controller="City" asp-action="Add" autocomplete="off" method="post" enctype="multipart/form-data">
+            <select class="form-select mb-3" name="CountryId">
+                <option selected disabled>Please select Country for the City</option>
+                @if (Model != null)
+                {
+                    @foreach (var countries in Model)
+                    {
+                        <option value="@(countries.Id.ToString())">@(countries.CountryName)</option>
+                    }
+                }
+            </select>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingCityNameInput" placeholder="cityName" name="CityName">
+                <label for="floatingCityNameInput">CityName</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Add City</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Add Country";
+}
+
+<div class="container col-lg-12">
+    <div class="row col-sm-6 center">
+        <h3 class="mb-3 mt-3">Add new Country</h3>
+        <form asp-controller="Country" asp-action="Add" autocomplete="off" method="post" enctype="multipart/form-data">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingCountryNameInput" placeholder="countryName" name="CountryName">
+                <label for="floatingCountryNameInput">Country name</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Country</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿@model CountryCreator.Web.Paging.PaginatedList<CountryCreator.Web.ViewModels.CountryViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    @if (TempData["result"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["result"].ToString()
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Country</th>
+                <th scope="col">Towns</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var countries in Model)
+            {
+                <tr>
+                    <th scope="row">@countries.CountryName</th>
+                    <td><a asp-controller="City" asp-action="ViewCities" asp-route-id="@countries.Id">View</a></td>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <td><a asp-controller="Country" asp-action="Edit" asp-route-id="@countries.Id">Edit</a></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <a asp-action="Index"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    <a asp-action="Index"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       class="btn btn-default @nextDisabled">
+        Next
+    </a>
+</div>

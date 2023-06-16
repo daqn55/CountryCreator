@@ -1,0 +1,46 @@
+﻿@model CountryCreator.Web.Paging.PaginatedList<CountryCreator.Web.ViewModels.CityViewModel>
+
+@{
+    ViewData["Title"] = "View Cities";
+}
+
+@if (ViewData["countryName"] != null)
+{
+    <h3>@ViewData["countryName"]</h3>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">City</th>
+            <th scope="col"></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var city in Model)
+        {
+            <tr>
+                <th scope="row">@city.CityName</th>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td><a asp-controller="City" asp-action="Edit" asp-route-id="@city.Id">Edit</a></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="ViewCities"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="ViewCities"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
